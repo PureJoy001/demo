@@ -5,12 +5,16 @@ import pandas as pd
 
 st.title("知识提取场景")
 
+
 # 侧边栏选择配置项
 st.sidebar.title("配置选项")
 llm_options = ['Llama3', 'Qwen2.5', "GPT4o",]
 selected_llm = st.sidebar.radio("选择基座大模型", options=llm_options, key="llm_option")
+other_llm_config = st.sidebar.text_input("其他大模型配置")
 vector_db_options = ['Qdrant', 'Chroma', "Milvus",]
 selected_vdb = st.sidebar.radio("选择向量数据库", options=vector_db_options, key="vdb_option")
+other_vdb_config = st.sidebar.text_input("其他向量数据库配置")
+
 
 # todo 根据不同配置选项调整后端配置
 if selected_llm == "Llama3":
@@ -83,3 +87,24 @@ with st.expander("各类实体统计"):
 with st.expander("提取文档摘要"):
     with st.spinner("正在生成文档摘要..."):
         extract_summary(uploaded_file)
+
+with st.expander("多种语言翻译"):
+    # todo 翻译
+    language_options = ["英文", "中文", "西班牙文", "法语", "德语"]
+    target_language = st.selectbox("选择目标语言", language_options)
+    input_text = st.text_input("输入需要翻译的文本")
+    if input_text:
+        translated_text = ""
+        if target_language == "英文":
+            translated_text = f"Translation to English: {input_text}"
+        elif target_language == "中文":
+            translated_text = f"翻译成中文: {input_text}"
+        elif target_language == "西班牙文":
+            translated_text = f"Traducción al español: {input_text}"
+        elif target_language == "法语":
+            translated_text = f"Traduction en français: {input_text}"
+        elif target_language == "德语":
+            translated_text = f"Übersetzung ins Deutsche: {input_text}"
+        # 显示翻译结果
+        st.text_input("翻译结果", translated_text)
+
