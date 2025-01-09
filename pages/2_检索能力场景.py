@@ -60,4 +60,5 @@ with col2:
     uploaded_image = st.file_uploader("请上传图片", type=["jpg", "jpeg", "png"])
 
 # todo 对话生成及展示
-
+print(user_input)
+print(uploaded_image)
