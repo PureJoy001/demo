@@ -28,23 +28,9 @@ uploaded_file = st.file_uploader("请上传文件", accept_multiple_files=False)
 
 # todo 根据上传的文件建立知识图谱
 def build_knowledge_graph(uploaded_file):
-    # 创建知识图谱（图）
-    G = nx.Graph()
-    # 添加节点和边（假设这些是从文档中抽取的实体及其关系）
-    G.add_node("Alice", type="Person")
-    G.add_node("Bob", type="Person")
-    G.add_node("Car", type="Object")
-    G.add_edge("Alice", "Bob", relation="knows")
-    G.add_edge("Alice", "Car", relation="drives")
-    G.add_edge("Bob", "Car", relation="owns")
-    # 使用matplotlib来绘制图
-    plt.figure(figsize=(8, 6))
-    pos = nx.spring_layout(G)  # 节点位置
-    nx.draw(G, pos, with_labels=True, node_size=3000, node_color="lightblue", font_size=12, font_weight="bold")
-    labels = nx.get_edge_attributes(G, 'relation')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-    # 显示图
-    st.pyplot(plt)
+    with open("graph_test-g.html", "r", encoding="utf-8") as file:
+        html_content = file.read()
+    st.components.v1.html(html_content, height=600)
 
 # todo 根据上传的文件提取实体
 def extract_entities(uploaded_file):
